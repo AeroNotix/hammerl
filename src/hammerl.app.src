@@ -5,14 +5,10 @@
   {vsn, "1"},
   {registered, []},
   {applications, [
-                  asn1,
-                  crypto,
-                  inets,
+                  cowboy,
                   kernel,
                   observer,
-                  public_key,
                   runtime_tools,
-                  ssl,
                   stdlib,
                   wx
                  ]},
