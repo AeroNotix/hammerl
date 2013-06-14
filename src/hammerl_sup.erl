@@ -52,8 +52,8 @@ init([]) ->
     Shutdown = 2000,
     Type = worker,
 
-    AChild = {hammerl_site, {hammerl_site, start_link, []},
-              Restart, Shutdown, Type, [hammerl_site]},
+    AChild = {hammerl, {hammerl, start, []},
+              Restart, Shutdown, Type, [hammerl]},
 
     {ok, {SupFlags, [AChild]}}.
 

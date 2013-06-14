@@ -5,7 +5,9 @@
   {vsn, "1"},
   {registered, []},
   {applications, [
+                  inets,
                   cowboy,
+                  ranch,
                   kernel,
                   observer,
                   runtime_tools,

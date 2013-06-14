@@ -12,8 +12,7 @@ start(_Type, _Args) ->
 	{ok, Port} = application:get_env(port),
 	{ok, _} = cowboy:start_http(http, 100, [{port, Port}], [
 		{env, [{dispatch, Dispatch}]}
-	]),
-    hammerl_sup:start_link().
+	]).
 
 stop(_State) ->
 	ok.
