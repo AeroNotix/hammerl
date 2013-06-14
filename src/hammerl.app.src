@@ -1,0 +1,22 @@
+%% -*- mode: Erlang;-*-
+{application, hammerl,
+ [
+  {description, "Yet another blog engine."},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  asn1,
+                  crypto,
+                  inets,
+                  kernel,
+                  observer,
+                  public_key,
+                  runtime_tools,
+                  ssl,
+                  stdlib,
+                  wx
+                 ]},
+  {mod, { hammerl_app, []}},
+  {env, []}
+ ]
+}.
