@@ -1,0 +1,11 @@
+*.dump
+*.beam
+deps/*
+config/*
+_rel/*
+doc/*.html
+doc/*.png
+doc/edoc-info
+doc/*.css
+*.erl#
+.#*
