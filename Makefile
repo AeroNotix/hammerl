@@ -1,4 +1,5 @@
 RELNAME=hammerl
+TABLE=blog
 
 all:
 	rebar get-deps; rebar compile; relx
@@ -15,3 +16,6 @@ deps:
 docs:
 	erl -noshell \
 		-eval 'edoc:application($(RELNAME), ".", []), init:stop().'
+
+database:
+	mysql -u $(MYSQL_USER) -p $(TABLE) <blog.sql
