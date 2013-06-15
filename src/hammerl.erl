@@ -6,7 +6,7 @@
 %% API.
 
 start() ->
-    ok = application:start(hammerl).
+	ok = application:start(hammerl).
 
 dispatchers() ->
 	emysql:add_pool(blog_pool,
