@@ -6,4 +6,5 @@
                              runtime_tools,stdlib,wx]},
               {mod,{hammerl_app,[]}},
               {env,[]},
-              {modules,[blog,hammerl,hammerl_app,hammerl_sup,index]}]}.
+              {modules,[blog,connection,hammerl,hammerl_app,hammerl_sup,
+                        index]}]}.
