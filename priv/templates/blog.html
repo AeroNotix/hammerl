@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+   {{ blog.blog_title }} 
+{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}emacs.css" />
+
+<div id="blogentry">
+  <h5>{{ blog.blog_title }}</h5>
+  {{ blog.blog_post|safe }}
+</div>
+{% endblock %}
