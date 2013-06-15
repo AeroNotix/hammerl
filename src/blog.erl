@@ -18,7 +18,14 @@ handle(Req, State) ->
 				{error, not_found} ->
 					cowboy_req:reply(404, [], do404(), Req2);
 				_Else2 ->
+					io:format("~p~n", [Blog#blog.content]),
 					cowboy_req:reply(200, [], Blog#blog.content, Req2)
 			end
 	end,
     {ok, Req, State}.
+
+terminate(_Reason, _Req, _State) ->
+	ok.
+
+do404() ->
+	<<"404">>.
