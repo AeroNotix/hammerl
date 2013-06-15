@@ -6,8 +6,19 @@
 -export([stop/1]).
 
 %% API.
-
 start(_Type, _Args) ->
+	%% Add our pool using our connection details.
+	emysql:add_pool(blog_pool,
+					1,
+					connection:username(),
+					connection:password(),
+					connection:host(),
+					connection:port(),
+					"blog",
+					utf8),
+	%% Prepare the statement the we will use quite a lot.
+	emysql:prepare(blog_stmt_get,
+				   <<"SELECT * from blog_entry WHERE blog_title=?">>),
 	Dispatch = hammerl:dispatchers(),
 	{ok, Port} = application:get_env(port),
 	{ok, _} = cowboy:start_http(http, 100, [{port, Port}], [
