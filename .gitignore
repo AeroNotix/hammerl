@@ -9,3 +9,4 @@ doc/edoc-info
 doc/*.css
 *.erl#
 .#*
+src/connection.erl
