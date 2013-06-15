@@ -22,4 +22,11 @@ reload_dispatchers() ->
 				   dispatchers()).
 
 blog(Name) ->
-	emysql:execute(blog_pool, blog_stmt_get, [Name]).
+	{_, _, _, Blog, _} = emysql:execute(blog_pool, blog_stmt_get, [Name]),
+	case length(Blog) of
+		0 ->
+			{error, not_found};
+		_N ->
+			{ID, Date, URL, Title, Content} = list_to_tuple(lists:nth(1, Blog)),
+			#blog{id = ID, date = Date, url = URL, title = Title, content = Content}
+	end.
