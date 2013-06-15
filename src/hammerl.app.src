@@ -6,6 +6,7 @@
   {registered, []},
   {applications, [
 				  emysql,
+				  erlydtl,
 				  cowboy,
 				  inets,
 				  kernel,
