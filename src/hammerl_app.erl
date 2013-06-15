@@ -7,6 +7,10 @@
 
 %% API.
 start(_Type, _Args) ->
+	%% compile our templates
+	{ok, Dir} = application:get_env(hammerl, template_dir),
+	erlydtl:compile_dir(Dir, templates),
+
 	%% Add our pool using our connection details.
 	emysql:add_pool(blog_pool,
 					1,
