@@ -5,15 +5,16 @@
   {vsn, "1"},
   {registered, []},
   {applications, [
-                  inets,
-                  cowboy,
-                  ranch,
-                  kernel,
-                  observer,
-                  runtime_tools,
-                  stdlib,
-                  wx
-                 ]},
+				  emysql,
+				  cowboy,
+				  inets,
+				  kernel,
+				  observer,
+				  ranch,
+				  runtime_tools,
+				  stdlib,
+				  wx
+				 ]},
   {mod, { hammerl_app, []}},
   {env, []}
  ]
