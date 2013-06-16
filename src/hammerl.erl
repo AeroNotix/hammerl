@@ -13,6 +13,10 @@ dispatchers() ->
 	cowboy_router:compile([
 		{'_', [
 			{"/blog/[:blogname]", blog, []},
+            {"/static/[...]", cowboy_static, [
+                {directory, {priv_dir, hammerl, [<<"static">>]}},
+                {mimetypes, {fun mimetypes:path_to_mimes/2, default}}
+            ]},
 			{"/", index, []}
 		]}
 	]).
