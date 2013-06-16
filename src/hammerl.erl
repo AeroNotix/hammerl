@@ -3,7 +3,7 @@
 -include("blog.hrl").
 
 %% API.
--export([start/0, dispatchers/0, reload_dispatchers/0, blog/1]).
+-export([start/0, dispatchers/0, reload_dispatchers/0, blog/1, bloglist/0]).
 
 %% API.
 start() ->
@@ -30,3 +30,17 @@ blog(Name) ->
 			{ID, Date, URL, Title, Content} = list_to_tuple(lists:nth(1, Blog)),
 			#blog{id = ID, date = Date, url = URL, title = Title, content = Content}
 	end.
+
+bloglist() ->
+	{_, _, _, Blogs, _} = emysql:execute(blog_pool, <<"SELECT * FROM blog_entry">>),
+	create_blog_list(Blogs).
+
+create_blog_list([]) ->
+	[];
+create_blog_list(L) ->
+	create_blog_list(L, []).
+create_blog_list([], BlogEntries) ->
+	BlogEntries;
+create_blog_list([H|T], BlogEntries) ->
+	{ID, Date, URL, Title, Content} = list_to_tuple(H),
+	create_blog_list(T, [#blog{id = ID, date = Date, url = URL, title = Title, content = Content}|BlogEntries]).
