@@ -5,6 +5,7 @@
   {vsn, "1"},
   {registered, []},
   {applications, [
+				  mimetypes,
 				  emysql,
 				  erlydtl,
 				  cowboy,
