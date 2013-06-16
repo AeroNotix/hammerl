@@ -11,7 +11,7 @@
   {% for entry in blog %}
   <li>
     <a href="{{ entry.blog_url }}">
-      {{ entry.blog_title }}
+      {{ entry.blog_title }} - {{ entry.date }}
     </a>
   </li>
   {% endfor %}
