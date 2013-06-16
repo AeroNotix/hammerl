@@ -17,6 +17,7 @@ dispatchers() ->
                 {directory, {priv_dir, hammerl, [<<"static">>]}},
                 {mimetypes, {fun mimetypes:path_to_mimes/2, default}}
             ]},
+			{"/about", about, []},
 			{"/", index, []}
 		]}
 	]).
