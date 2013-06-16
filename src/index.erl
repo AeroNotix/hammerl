@@ -6,7 +6,7 @@ init(_Transport, Req, []) ->
     {ok, Req, undefined}.
 
 handle(Req, State) ->
-    cowboy_req:reply(200, [], <<"OK">>, Req),
+    cowboy_req:reply(200, [], templates:base([] ++ context:ctx()), Req),
     {ok, Req, State}.
 
 terminate(_Reason, _Req, _State) ->
