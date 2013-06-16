@@ -6,5 +6,5 @@
                              observer,ranch,runtime_tools,stdlib,wx]},
               {mod,{hammerl_app,[]}},
               {env,[]},
-              {modules,[blog,connection,hammerl,hammerl_app,hammerl_sup,
-                        index]}]}.
+              {modules,[blog,connection,context,gen_handlers,hammerl,
+                        hammerl_app,hammerl_sup,index]}]}.
