@@ -10,4 +10,4 @@ handle(Req, State) ->
     {ok, Req2, State}.
 
 terminate(_Reason, _Req, _State) ->
-	ok.
+    ok.

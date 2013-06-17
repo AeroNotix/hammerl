@@ -7,10 +7,10 @@
 %% @spec
 %% ctx() -> list()
 ctx() ->
-	[
-	 {"STATIC_URL", "/static/"},
-	 {githuburl, "https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"}
-	].
+    [
+     {"STATIC_URL", "/static/"},
+     {githuburl, "https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"}
+    ].
 
 %% @doc
 %% strdate/1 takes a date in the format:
@@ -19,5 +19,5 @@ ctx() ->
 %% @spec
 %% strdate(Date::tuple()) -> iolist()
 strdate(Date) ->
-	{date, {Y, M, D}} = Date,
-	io_lib:format("~p/~p/~p", [D, M, Y]).
+    {date, {Y, M, D}} = Date,
+    io_lib:format("~p/~p/~p", [D, M, Y]).
