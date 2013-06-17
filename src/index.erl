@@ -5,6 +5,9 @@
 init(_Transport, Req, []) ->
     {ok, Req, undefined}.
 
+%% @doc
+%% handle/2 renders the base template which is simply the index for
+%% the webpage.
 handle(Req, State) ->
     cowboy_req:reply(200, [], templates:base([] ++ context:ctx()), Req),
     {ok, Req, State}.
