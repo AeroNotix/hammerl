@@ -48,13 +48,20 @@ reload_dispatchers() ->
 %% provide.
 %% @spec blog(Name::string()) -> blog() | {error, not_found}
 blog(Name) ->
-    {_, _, _, Blog, _} = emysql:execute(blog_pool, blog_stmt_get, [Name]),
-    case length(Blog) of
-        0 ->
-            {error, not_found};
-        _N ->
-            {ID, Date, URL, Title, Content} = list_to_tuple(lists:nth(1, Blog)),
-            #blog{id = ID, date = Date, url = URL, title = Title, content = Content}
+    case simple_cache:lookup(Name) of
+	{error, not_found} ->
+	    {_, _, _, Blog, _} = emysql:execute(blog_pool, blog_stmt_get, [Name]),
+	    case length(Blog) of
+		0 ->
+		    {error, not_found};
+		_N ->
+		    {ID, Date, URL, Title, Content} = list_to_tuple(lists:nth(1, Blog)),
+		    NewBlog = #blog{id = ID, date = Date, url = URL, title = Title, content = Content},
+		    simple_cache:insert(Name, NewBlog),
+		    NewBlog
+	    end;
+	{ok, Blog} ->
+	    Blog
     end.
 
 %% @doc
@@ -62,8 +69,15 @@ blog(Name) ->
 %% database.
 %% @spec bloglist() -> list()
 bloglist() ->
-    {_, _, _, Blogs, _} = emysql:execute(blog_pool, <<"SELECT * FROM blog_entry">>),
-    create_blog_list(Blogs).
+    case simple_cache:lookup(bloglist) of
+	{error, not_found} ->
+	    {_, _, _, Blogs, _} = emysql:execute(blog_pool, <<"SELECT * FROM blog_entry">>),
+	    BlogLists = create_blog_list(Blogs),
+	    simple_cache:insert(bloglist, BlogLists),
+	    BlogLists;
+	{ok, Blogs} ->
+	    Blogs
+    end.
 
 %% @doc
 %% create_blog_list/1 takes a list of blog entries taken from the
