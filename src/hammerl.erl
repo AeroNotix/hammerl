@@ -12,14 +12,28 @@ start() ->
 dispatchers() ->
     cowboy_router:compile([
                            {'_', [
+                                  %% This route will display the list
+                                  %% of blog entries or a specific
+                                  %% blog depending on whether
+                                  %% :blogname is given.
                                   {"/blog/[:blogname]", blog, []},
+
+                                  %% Static handler route, it serves
+                                  %% the priv/* directory.
                                   {"/static/[...]", cowboy_static,
                                    [
                                     {directory, {priv_dir, hammerl, [<<"static">>]}},
                                     {mimetypes, {fun mimetypes:path_to_mimes/2, default}}
                                    ]
                                   },
+
+                                  %% The about page is a simple
+                                  %% redirect from /about =>
+                                  %% /blog/about.
                                   {"/about", about, []},
+
+                                  %% The index page with a specialized
+                                  %% template.
                                   {"/", index, []}
                                  ]
                            }
