@@ -13,8 +13,9 @@ ctx() ->
 	].
 
 %% @doc
-%% strdate/1 takes a date in the format {date, {Y, M, D}} and returns
-%% a date in the form: D/M/Y.
+%% strdate/1 takes a date in the format:
+%%     ```{date, {Y, M, D}}'''
+%% and returns a date in the form: D/M/Y.
 %% @spec
 %% strdate(Date::tuple()) -> iolist()
 strdate(Date) ->
