@@ -6,8 +6,8 @@ init(_Transport, Req, []) ->
     {ok, Req, undefined}.
 
 handle(Req, State) ->
-    cowboy_req:reply(301, [{"Location", "/blog/about"}], <<"">>, Req),
-    {ok, Req, State}.
+    Req2 = gen_handlers:redirect("/blog/about", Req),
+    {ok, Req2, State}.
 
 terminate(_Reason, _Req, _State) ->
 	ok.
