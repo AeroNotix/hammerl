@@ -26,6 +26,10 @@ reload_dispatchers() ->
 	cowboy:set_env(http, dispatch,
 				   dispatchers()).
 
+%% @doc
+%% blog/1 will return the associated blog entry for the URL that you
+%% provide.
+%% @spec blog(Name::string()) -> blog() | {error, not_found}
 blog(Name) ->
 	{_, _, _, Blog, _} = emysql:execute(blog_pool, blog_stmt_get, [Name]),
 	case length(Blog) of
@@ -36,10 +40,19 @@ blog(Name) ->
 			#blog{id = ID, date = Date, url = URL, title = Title, content = Content}
 	end.
 
+%% @doc
+%% bloglist/0 returns a proplist containing all the blogs in the
+%% database.
+%% @spec bloglist() -> list()
 bloglist() ->
 	{_, _, _, Blogs, _} = emysql:execute(blog_pool, <<"SELECT * FROM blog_entry">>),
 	create_blog_list(Blogs).
 
+%% @doc
+%% create_blog_list/1 takes a list of blog entries taken from the
+%% database and creates a list of proplists out of them so they can be
+%% interpolated into a template easily.
+%% @spec create_blog_list(L::list()) -> list()
 create_blog_list([]) ->
 	[];
 create_blog_list(L) ->
