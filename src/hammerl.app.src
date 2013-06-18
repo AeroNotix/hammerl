@@ -5,18 +5,19 @@
   {vsn, "1"},
   {registered, []},
   {applications, [
-				  mimetypes,
-				  emysql,
-				  erlydtl,
-				  cowboy,
-				  inets,
-				  kernel,
-				  observer,
-				  ranch,
-				  runtime_tools,
-				  stdlib,
-				  wx
-				 ]},
+		  mimetypes,
+		  emysql,
+		  erlydtl,
+		  cowboy,
+		  inets,
+		  kernel,
+		  observer,
+		  ranch,
+		  runtime_tools,
+		  stdlib,
+		  simple_cache,
+		  wx
+		 ]},
   {mod, { hammerl_app, []}},
   {env, []}
  ]
