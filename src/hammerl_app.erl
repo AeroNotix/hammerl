@@ -22,12 +22,12 @@ start(_Type, _Args) ->
 					utf8),
 	%% Prepare the statement the we will use quite a lot.
 	emysql:prepare(blog_stmt_get,
-				   <<"SELECT * from blog_entry WHERE blog_url=?">>),
+				   <<"SELECT * from blog_entry WHERE blog_urlx=?">>),
 	Dispatch = hammerl:dispatchers(),
 	{ok, Port} = application:get_env(port),
 	{ok, _} = cowboy:start_http(http, 100, [{port, Port}], [
-		{env, [{dispatch, Dispatch}]}
-	]).
+                                                            {env, [{dispatch, Dispatch}]}
+                                                           ]).
 
 stop(_State) ->
 	ok.
