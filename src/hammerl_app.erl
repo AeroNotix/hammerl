@@ -24,6 +24,7 @@ start(_Type, _Args) ->
 		   <<"SELECT * from blog_entry WHERE blog_url=?">>),
     Dispatch = hammerl:dispatchers(),
     {ok, Port} = application:get_env(port),
+    {ok, _Pid} = stats_sup:start_link(),
     {ok, _} = cowboy:start_http(
                 http, 100, [{port, Port}],
                 [{env, [{dispatch, Dispatch}]}]
