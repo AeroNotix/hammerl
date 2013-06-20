@@ -8,4 +8,4 @@
               {mod,{hammerl_app,[]}},
               {env,[]},
               {modules,[about,blog,connection,context,gen_handlers,hammerl,
-                        hammerl_app,hammerl_sup,index]}]}.
+                        hammerl_app,hammerl_sup,index,stats,stats_sup]}]}.
