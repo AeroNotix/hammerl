@@ -11,7 +11,7 @@
 -behaviour(gen_server).
 
 %% API
--export([start_link/0, inc/1]).
+-export([start_link/0, inc/1, total/1]).
 
 %% gen_server callbacks
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
@@ -36,7 +36,10 @@ start_link() ->
     gen_server:start_link({local, ?SERVER}, ?MODULE, [], []).
 
 inc(What) ->
-    gen_server:call({local, ?SERVER}, {inc, What}).
+    gen_server:cast(?SERVER, {inc, What}).
+
+total(What) ->
+    gen_server:call(?SERVER, {total, What}).
 
 %%%===================================================================
 %%% gen_server callbacks
@@ -70,10 +73,9 @@ init([]) ->
 %%                                   {stop, Reason, State}
 %% @end
 %%--------------------------------------------------------------------
-handle_call({inc, What}, _From, State) ->
-    Reply = ok,
-    State2 = dict:store(What, current(What, State)+1, State),
-    {reply, Reply, State2}.
+handle_call({total, What}, _From, State) ->
+    Total = current(What, State),
+    {reply, Total, State}.
 
 %%--------------------------------------------------------------------
 %% @private
@@ -85,8 +87,9 @@ handle_call({inc, What}, _From, State) ->
 %%                                  {stop, Reason, State}
 %% @end
 %%--------------------------------------------------------------------
-handle_cast(_Msg, State) ->
-    {noreply, State}.
+handle_cast({inc, What}, State) ->
+    State2 = #state{totals = dict:store(What, current(What, State)+1, State#state.totals)},
+    {noreply, State2}.
 
 %%--------------------------------------------------------------------
 %% @private
@@ -131,9 +134,9 @@ code_change(_OldVsn, State, _Extra) ->
 %%%===================================================================
 
 current(What, State) ->
-    case dict:is_key(What, State) of
+    case dict:is_key(What, State#state.totals) of
         true ->
-            dict:fetch(What, State);
+            dict:fetch(What, State#state.totals);
         false ->
             0
     end.
