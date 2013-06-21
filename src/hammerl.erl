@@ -52,6 +52,7 @@ reload_dispatchers() ->
 %% provide.
 %% @spec blog(Name::string()) -> blog() | {error, not_found}
 blog(Name) ->
+    stats:inc(http_uri:encode(Name)),
     case simple_cache:lookup(Name) of
 	{error, not_found} ->
 	    {_, _, _, Blog, _} = emysql:execute(blog_pool, blog_stmt_get, [Name]),
@@ -73,6 +74,7 @@ blog(Name) ->
 %% database.
 %% @spec bloglist() -> list()
 bloglist() ->
+    stats:inc("bloglist"),
     case simple_cache:lookup(bloglist) of
 	{error, not_found} ->
 	    {_, _, _, Blogs, _} = emysql:execute(blog_pool, <<"SELECT * FROM blog_entry">>),
