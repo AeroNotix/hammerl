@@ -32,6 +32,10 @@ dispatchers() ->
                                   %% /blog/about.
                                   {"/about", about, []},
 
+                                  %% The statistics page shows the
+                                  %% page hits for each page.
+                                  {"/statistics/", statistics, []},
+
                                   %% The index page with a specialized
                                   %% template.
                                   {"/", index, []}

@@ -11,7 +11,7 @@
 -behaviour(gen_server).
 
 %% API
--export([start_link/0, inc/1, total/1]).
+-export([start_link/0, inc/1, total/1, all/0]).
 
 %% gen_server callbacks
 -export([init/1, handle_call/3, handle_cast/2, handle_info/2,
@@ -40,6 +40,9 @@ inc(What) ->
 
 total(What) ->
     gen_server:call(?SERVER, {total, What}).
+
+all() ->
+    gen_server:call(?SERVER, all).
 
 %%%===================================================================
 %%% gen_server callbacks
@@ -75,7 +78,11 @@ init([]) ->
 %%--------------------------------------------------------------------
 handle_call({total, What}, _From, State) ->
     Total = current(What, State),
-    {reply, Total, State}.
+    {reply, Total, State};
+
+handle_call(all, _From, State) ->
+    {reply, dict:to_list(State#state.totals), State}.
+
 
 %%--------------------------------------------------------------------
 %% @private
