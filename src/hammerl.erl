@@ -85,6 +85,10 @@ bloglist() ->
 	    Blogs
     end.
 
+%% @doc
+%% propblogs/0 will return a proplist of all the blogs in the system
+%% populating the most often used fields.
+%% @spec propblogs() -> proplist()
 propblogs() ->
     [[{blog_title, Blog#blog.title},
       {blog_url, Blog#blog.url},
