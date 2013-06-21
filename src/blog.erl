@@ -11,9 +11,7 @@ handle(Req, State) ->
     {BlogName, Req2} = cowboy_req:binding(blogname, Req),
     case BlogName of
         undefined ->
-            Blogs = [[{blog_title, Blog#blog.title},
-                      {blog_url, Blog#blog.url},
-                      {date, context:strdate(Blog#blog.date)}] || Blog <- hammerl:bloglist()],
+            Blogs = hammerl:propblogs(),
             cowboy_req:reply(200, [], templates:blogmode([{blog, Blogs}] ++ context:ctx()), Req2);
         _Else ->
             Blog = hammerl:blog(binary_to_list(BlogName)),

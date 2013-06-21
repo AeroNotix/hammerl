@@ -3,7 +3,7 @@
 -include("blog.hrl").
 
 %% API.
--export([start/0, dispatchers/0, reload_dispatchers/0, blog/1, bloglist/0]).
+-export([start/0, dispatchers/0, reload_dispatchers/0, blog/1, bloglist/0, propblogs/0]).
 
 %% API.
 start() ->
@@ -84,6 +84,11 @@ bloglist() ->
 	{ok, Blogs} ->
 	    Blogs
     end.
+
+propblogs() ->
+    [[{blog_title, Blog#blog.title},
+      {blog_url, Blog#blog.url},
+      {date, context:strdate(Blog#blog.date)}] || Blog <- bloglist()].
 
 %% @doc
 %% create_blog_list/1 takes a list of blog entries taken from the
