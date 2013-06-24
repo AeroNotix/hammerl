@@ -7,6 +7,9 @@
 init(_Transport, Req, []) ->
     {ok, Req, undefined}.
 
+%% @doc
+%% Serves out a particular blog entry or the list of blog entries if
+%% no blog name was provided.
 handle(Req, State) ->
     {BlogName, Req2} = cowboy_req:binding(blogname, Req),
     case BlogName of
