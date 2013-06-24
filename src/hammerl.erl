@@ -9,6 +9,11 @@
 start() ->
     ok = application:start(hammerl).
 
+%% @doc
+%% dispatchers/0 is a method to return the various endpoint dispatch
+%% modules. We do this because it's easier to do code-reloading since
+%% otherwise the dispatchers would be loaded when starting the hammerl
+%% application.
 dispatchers() ->
     cowboy_router:compile([
                            {'_', [
