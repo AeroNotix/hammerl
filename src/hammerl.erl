@@ -48,6 +48,11 @@ dispatchers() ->
                            }
                           ]).
 
+%% @doc
+%% reload_dispatchers allows us to inject new routes/handlers into the
+%% running application. A code-upgrade should take advantage of this
+%% function.
+%% @spec reload_dispatchers() -> ok.
 reload_dispatchers() ->
     cowboy:set_env(http, dispatch,
                    dispatchers()).
