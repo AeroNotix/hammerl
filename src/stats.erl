@@ -54,38 +54,24 @@ all() ->
 init([]) ->
     {ok, #state{}}.
 
-%%--------------------------------------------------------------------
-%% @private
 %% @doc
-%% Handling call messages
-%%
-%% @spec handle_call(Request, From, State) ->
-%%                                   {reply, Reply, State} |
-%%                                   {reply, Reply, State, Timeout} |
-%%                                   {noreply, State} |
-%%                                   {noreply, State, Timeout} |
-%%                                   {stop, Reason, Reply, State} |
-%%                                   {stop, Reason, State}
-%% @end
-%%--------------------------------------------------------------------
+%% handle_call({total, What}), _From, State) will return the total
+%% amount for the What you pass in.
+%% @spec handle_call({total, What}, _Form, State) -> integer() | {error, Reason}
 handle_call({total, What}, _From, State) ->
     Total = current(What, State),
     {reply, Total, State};
 
+%% @doc
+%% This will return a list with a {Key, Value} for each of the entries
+%% in the map
+%% @spec handle_call(all, _From, State) -> list()
 handle_call(all, _From, State) ->
     {reply, dict:to_list(State#state.totals), State}.
 
 
-%%--------------------------------------------------------------------
-%% @private
 %% @doc
-%% Handling cast messages
-%%
-%% @spec handle_cast(Msg, State) -> {noreply, State} |
-%%                                  {noreply, State, Timeout} |
-%%                                  {stop, Reason, State}
-%% @end
-%%--------------------------------------------------------------------
+%% This will increment the counter for one element in the table.
 handle_cast({inc, What}, State) ->
     State2 = #state{totals = dict:store(What, current(What, State)+1, State#state.totals)},
     {noreply, State2}.
