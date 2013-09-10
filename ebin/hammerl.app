@@ -7,6 +7,5 @@
                              wx]},
               {mod,{hammerl_app,[]}},
               {env,[]},
-              {modules,[about,blog,connection,context,gen_handlers,hammerl,
-                        hammerl_app,hammerl_sup,index,statistics,stats,
-                        stats_sup]}]}.
+              {modules,[about,blog,context,gen_handlers,hammerl,hammerl_app,
+                        index,statistics,stats,stats_sup]}]}.

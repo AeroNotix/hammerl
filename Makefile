@@ -19,3 +19,7 @@ docs:
 
 database:
 	mysql -u $(MYSQL_USER) -p $(TABLE) <blog.sql
+
+dialyze:
+	dialyzer --fullpath -Wno_undefined_callbacks -Wno_return \
+	-r ebin/

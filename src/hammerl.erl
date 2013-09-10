@@ -60,7 +60,7 @@ reload_dispatchers() ->
 %% @doc
 %% blog/1 will return the associated blog entry for the URL that you
 %% provide.
-%% @spec blog(Name::string()) -> blog() | {error, not_found}
+-spec blog(Name::string()) -> blog() | {error, not_found}.
 blog(Name) ->
     stats:inc(http_uri:encode(Name)),
     case simple_cache:lookup(Name) of
@@ -82,7 +82,7 @@ blog(Name) ->
 %% @doc
 %% bloglist/0 returns a proplist containing all the blogs in the
 %% database.
-%% @spec bloglist() -> list()
+-spec bloglist() -> list().
 bloglist() ->
     stats:inc("bloglist"),
     case simple_cache:lookup(bloglist) of
@@ -98,7 +98,7 @@ bloglist() ->
 %% @doc
 %% propblogs/0 will return a proplist of all the blogs in the system
 %% populating the most often used fields.
-%% @spec propblogs() -> proplist()
+-spec propblogs() -> [proplists:proplist()].
 propblogs() ->
     [[{blog_title, Blog#blog.title},
       {blog_url, Blog#blog.url},
@@ -108,7 +108,7 @@ propblogs() ->
 %% create_blog_list/1 takes a list of blog entries taken from the
 %% database and creates a list of proplists out of them so they can be
 %% interpolated into a template easily.
-%% @spec create_blog_list(L::list()) -> list()
+-spec create_blog_list(L::list()) -> list().
 create_blog_list([]) ->
     [];
 create_blog_list(L) ->
